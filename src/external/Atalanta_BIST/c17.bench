@@ -1,0 +1,24 @@
+# c17
+# 5 inputs
+# 2 outputs
+# 0 inverter
+# 6 gates ( 6 NANDs )
+
+INPUT(N1)
+INPUT(N2)
+INPUT(N3)
+INPUT(N6)
+INPUT(N7)
+
+OUTPUT(N22)
+OUTPUT(N23)
+
+N10 = NAND(N1, N3)
+N11 = NAND(N3, N6)
+N16 = NAND(N2, N11)
+N19 = NAND(N11, N7)
+N22 = NAND(N10, N16)
+N23 = NAND(N16, N19)
+
+
+

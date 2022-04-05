@@ -1,0 +1,12 @@
+# c4
+# 2 inputs
+# 1 outputs
+
+INPUT(N1)
+INPUT(N2)
+
+OUTPUT(N4)
+
+N3 = NAND(N1, N2)
+N4 = NOT(N3)
+
