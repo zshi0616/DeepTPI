@@ -4,7 +4,7 @@ python3 rl_train.py \
  --exp_id ITC22_deeptpi_train \
  --RL_model non_level \
  --ftpt update_with \
- --feature_pretrain_model ../exp/deepgate/pretrained.sh \
+ --feature_pretrain_model ../exp/deepgate/pretrained.pth \
  --target LBIST \
  --data_dir ../data/ITC22_dataset/train/ \
  --num_rounds 10 --dataset benchmarks \

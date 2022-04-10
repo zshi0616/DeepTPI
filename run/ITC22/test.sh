@@ -15,7 +15,7 @@ python3 rl_test.py \
  --no_cp -1 --no_tp_each_round 1 \
  --RL_model non_level --no_cop_tpi \
  --ftpt update_with \
- --feature_pretrain_model ../exp/deepgate/pretrained.sh \
+ --feature_pretrain_model ../exp/deepgate/pretrained.pth \
  --ignore_action
 
 
