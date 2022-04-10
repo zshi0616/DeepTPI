@@ -179,6 +179,7 @@ src/rl/__pycache__/
 src/models/__pycache__/
 .vscode/
 ITC22_netlist/
+ITC22_exp/
 
 # tools
 dataset/
