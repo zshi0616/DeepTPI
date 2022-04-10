@@ -2,29 +2,14 @@
 
 Code repository for the paper:  
 ** DeepTPI: Test Point Insertion with Deep Reinforcement Learning **  
-[Zhengyuan Shi](https://cure-lab.github.io/people/zhengyuan_shi/index.html), 
-[Min Li](https://scholar.google.com/citations?user=X5gRH80AAAAJ&hl=zh-CN), 
-[Sadaf Khan](https://khan-sadaf.github.io/), 
-Liuzheng Wang, Naixing Wang, Yu Huang, and 
-[Qiang Xu](https://cure-lab.github.io/qiang_xu.html)
 
 # Abstract
+Test point insertion (TPI) is a widely used technique for testability enhancement, especially for logic built-in self-test (LBIST) due to its relatively low fault coverage. In this paper, we propose a novel TPI approach based on deep reinforcement learning (DRL), named \emph{DeepTPI}. Unlike previous learning-based solutions that formulate the TPI task as a supervised-learning problem, we train a novel DRL agent with the Deep Q-learning algorithm. Specifically, we model circuits as directed graphs and embed a graph neural networks (GNNs) into the value network to predict the action value. Meanwhile, we leverage the general node embedding from a pre-trained model as a partial node feature and design a dedicated testability-aware attention mechanism for the value network. The ablation studies prove that our agent can learn a better policy with the above two methods. Experimental results on circuits with different scale show that DeepTPI significantly improves test coverage compared to existing solutions. The code of this work is available at \url{https://anonymous.4open.science/r/DeepTPI/}
 
-## How does it work
-In modern very large-scale integrated circuits, testing is a significant part to ensure the high-assurance and reliability. For example, logic build-in-self-test (LBIST) and Automatic test pattern generation (ATPG) technologies are used for manufacturing and reliability inspection. 
-
-## TPI for LBIST and ATPG
-
+<!-- ## TPI for LBIST
 The pseudo-random test patterns in LBIST are generated on chip to verify whether the correctness of circuit response. However, there are still some random pattern resistant (RPR) faults, whose patterns are very difficultly excited by random pattern generator. In order to detect these RPR faults and improve test coverage (TC), DFT engineers have to insert some extra gates into the netlist following the test point insertion (TPI) methods. These extra gates allow directly modifying the value somewhere inside the circuit and are named as control points (CP). 
 
-However, different from LBIST, ATPG will generate determinant test cubes for every testable faults instead of relying on the random cubes. The test pattern is merged from test cubes, thus if there are some internal value conflict, more test patterns will be stored. To deal with this problem and further reduce pattern counts (PC), some extra CPs are inserted into circuits. Please refer [paper](https://ieeexplore.ieee.org/abstract/document/7342383) for more details about ATPG conflict. 
-
-All in all, the objective of **TPI for LBIST** is **improving test converage** with random patterns and the objective of **TPI for ATPG** is **reducing pattern counts**. 
-
-# RL Agent for LBIST task
-｜ State | Netlist | 
-| Action | Position and CP type (AND/OR) | 
-| Reward | TC Improvement| 
+## How does it work -->
 
 
 
@@ -33,28 +18,22 @@ The experiments are conducted on Linux, with Python version 3.7.4, PyTorch versi
 
 To set up the environment:
 ```sh
-git clone https://github.com/Ironprop-Stone/RL_TPI
-cd RL_TPI
 conda create -n deepgate python=3.7.4
 conda activate deepgate
 pip install -r requirements.txt
 ```
 
-# Prepare dataset
-
 
 # Running training code
-To train the RL Value Network,
+To train the RL Value Network (Graph-DQN),
 ```sh
-bash experiment/RL/train_agent.sh
+bash run/ITC22/train.sh
 ```
 For settings of experiments, run the scripts in directory `./exp`.
 
-# Load trained model
+# Running testing code
+To test the RL agent,
+```sh
+bash run/ITC22/test.sh
+```
 
-# Run evaluation code
-
-# Results
-
-
-# DeepTPI

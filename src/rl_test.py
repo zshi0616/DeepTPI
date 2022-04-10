@@ -75,8 +75,8 @@ def train_RL(args):
         # if 'b17' in g.name or 'mem_ctrl' in g.name:
         #     continue
 
-        # if 'b12' not in g.name:
-        #     continue
+        if 'b15' not in g.name:
+            continue
         
         print(g.name)
         baseline_env = Env(g, config, args)

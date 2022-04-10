@@ -160,10 +160,18 @@ cython_debug/
 #.idea/
 
 # data 
-data/
+data/benchmarks/
+data/random_circuits/
+
+# run script
+run/prob/
+run/RL/
+run/RL_ATPG_PC/
+run/RL_ATPG_TC/
+run/RL_BIST/
 
 # Experiment
-exp/
+exp/prob/
 
 # tmp
 src/utils/__pycache__/

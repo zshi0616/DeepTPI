@@ -14,7 +14,6 @@ class CircuitDataset(InMemoryDataset):
     r"""
     A variety of circuit graph datasets, *e.g.*, open-sourced benchmarks,
     random circuits.
-    Modified by Min.
 
     Args:
         root (string): Root directory where the dataset should be saved.

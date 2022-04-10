@@ -18,7 +18,6 @@ def circuit_parse_pyg(x, edge_index, y, use_edge_attr=False, reconv_skip_connect
     '''
     A function to parse the circuits and labels stored in `.npz` format to `Pytorch Geometric` Data.
     Optional, will add the skip connection, and the edge attributes into the graphs if specified.
-    Modified by Min.
     ...
     Parameters:
         x : numpy array with shape of [num_nodes, 9], the node feature matrix with shape [num_nodes, num_node_features], the current dimension of num_node_features is 9, wherein 0th - node_name defined in bench (str); 1st - integer index for the gate type; 2nd - logic level; 3rd - C1; 4th - C0; 5th - Obs; 6th - fan-out, 7th - boolean recovengence, 8th - index of the source node (-1 for non recovengence).

@@ -293,7 +293,7 @@ class Env(object):
 
         self.graph.cp_idx = cp_idx
         self.graph.cp_tot = insert_cp_cnt
-        self.new_update_graph()
+        # self.new_update_graph()
         return self.graph, reward
 
     def update_tp_list(self, tp_pos, tp_type):

@@ -303,6 +303,7 @@ class Netlist(object):
             C0, C1, CO
         Input: Control Point Instance
         '''
+        return
         if self.args.RL_model != 'deepgate' and self.args.ftpt == 'no':
             return
 
@@ -512,6 +513,16 @@ class Netlist(object):
         sort_value = []
         sort_type = []
 
+        # for k, ele in enumerate(self.co[:self.init_size]):
+        #     if self.mask[k] == 1:
+        #         sort_type.append('OP')
+        #         sort_value.append(float(ele))
+        #     else:
+        #         sort_type.append('None')
+        #         sort_value.append(1)
+        # sort_idx = np.argsort(sort_value)
+        # print('CO: {:}'.format(sort_value[sort_idx[0]]))
+
         for k, ele in enumerate(self.c0[:self.init_size]):
             if self.mask[k] == 1:
                 if ele < 0.5:
@@ -523,8 +534,11 @@ class Netlist(object):
             else:
                 sort_type.append('None')
                 sort_value.append(0.5)
-
         sort_idx = np.argsort(sort_value)
+
+
+
+
         idx = sort_idx[0]
         cp_type = sort_type[idx]
         if cp_type == 'None':

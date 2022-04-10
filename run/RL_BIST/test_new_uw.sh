@@ -1,5 +1,5 @@
 cd ./src
-python3 rl_test.py \
+python3 ITC22_exp.py \
  --target LBIST \
  --exp_id rl_test_new_uw --pretrain False \
  --data_dir ../data/benchmarks/rl_test_large/ \
