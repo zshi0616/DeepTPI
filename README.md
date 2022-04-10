@@ -2,7 +2,6 @@
 
 Code repository for the paper:  
 ** DeepTPI: Test Point Insertion with Deep Reinforcement Learning **  
-submitted to ITC22[http://www.itctestweek.org/]
 
 # Abstract
 Test point insertion (TPI) is a widely used technique for testability enhancement, especially for logic built-in self-test (LBIST) due to its relatively low fault coverage. In this paper, we propose a novel TPI approach based on deep reinforcement learning (DRL), named \emph{DeepTPI}. Unlike previous learning-based solutions that formulate the TPI task as a supervised-learning problem, we train a novel DRL agent with the Deep Q-learning algorithm. Specifically, we model circuits as directed graphs and embed a graph neural networks (GNNs) into the value network to predict the action value. Meanwhile, we leverage the general node embedding from a pre-trained model as a partial node feature and design a dedicated testability-aware attention mechanism for the value network. The ablation studies prove that our agent can learn a better policy with the above two methods. Experimental results on circuits with different scale show that DeepTPI significantly improves test coverage compared to existing solutions. The code of this work is available at https://anonymous.4open.science/r/DeepTPI/
