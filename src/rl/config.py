@@ -8,14 +8,14 @@ class RL_Config(object):
             ###################################################
             print('[CONFIG-INFO] Load ATPG RL Setting')
             # RL model and training
-            self.OBSERVE = 50. # timesteps to observe before training
-            self.REPLAY_MEMORY = 1000 # number of previous transitions to remember
+            self.OBSERVE = 100. # timesteps to observe before training
+            self.REPLAY_MEMORY = 1e6 # number of previous transitions to remember
             self.BATCH_SIZE = 8 # size of minibatch
             self.GAMMA = 0.5 # decay rate of past observations
             self.UPDATE_TIME = 50
-            self.EACH_TRAIN_TIMES = 30
+            self.EACH_TRAIN_TIMES = 100
             self.SAVE_ROUND_GAP = -1
-            self.RANDOM_ACTION = 500
+            self.RANDOM_ACTION = 100
 
             # Test Point
             self.MAX_CP_CNT = 30

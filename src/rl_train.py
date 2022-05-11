@@ -47,7 +47,7 @@ def train_RL(args):
     start_circuit_idx = -1
 
     if args.resume:
-        config.RANDOM_ACTION = 0
+        # config.RANDOM_ACTION = 0
         agent.Q_netT, _, start_circuit_idx = load_model(
         agent.Q_netT, args.load_model, agent.optimizer, args.resume, args.lr, args.lr_step)
         agent.Q_netT.args.pretrain = False
@@ -81,6 +81,7 @@ def train_RL(args):
         is_vaild_circuit = False
         logger.write('==========================\n')
         logger.write('Circuit: {} , Idx: {:}\n'.format(g.name, circuit_idx))
+        agent.action_times = 0
         for train_times in range(config.EACH_TRAIN_TIMES):
             logger.write('Round: {:}\n'.format(train_times))
             env = Env(g, config, args)

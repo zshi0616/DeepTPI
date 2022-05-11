@@ -34,8 +34,8 @@ class Agent(object):
         self.args = args
         self.replayMemory = deque()
         self.config = config
-        self.timeStep = 0
         self.train_times = 0
+        self.action_times = 0
         self.average_loss = []
 
         # GPU
@@ -118,6 +118,19 @@ class Agent(object):
         nextState_batch.num_nodes = len(nextState_batch.x)
 
         reward_batch = torch.tensor(reward_batch_all)
+        # normalization 
+        max_reward = torch.abs(torch.max(reward_batch))
+        min_reward = torch.abs(torch.min(reward_batch))
+        for ele in reward_batch:
+            if ele > 0:
+                ele /= max_reward
+            elif ele < 0: 
+                ele /= min_reward
+
+            # mean_a = torch.mean(reward_batch)
+            # std_a = torch.std(reward_batch)
+            # reward_batch = (reward_batch - mean_a) / std_a
+        
         QValue_batch = self.Q_netT(nextState_batch)[0]
         QValue_batch = QValue_batch.to('cpu')
         QValue_batch = QValue_batch.detach().numpy()
@@ -169,17 +182,20 @@ class Agent(object):
 
         self.average_loss.append(float(loss))
         self.train_times += 1
-        if self.timeStep % config.UPDATE_TIME == 0:
+        if self.train_times % config.UPDATE_TIME == 0:
             self.Q_netT.load_state_dict(self.Q_net.state_dict())
+            print('[INFO] Update Q and Q star')
         return float(loss)
 
     def getAction(self, netlist, cp_idx, cp_tot):
         cand_score = []
         cand_idx = []
         cand_type = []
+        self.action_times += 1
 
         # Random Action
-        if self.train_times < self.config.RANDOM_ACTION and self.args.RL_mode == 'train':
+        if self.action_times < self.config.RANDOM_ACTION and self.args.RL_mode == 'train':
+            print("[INFO] Random Action")
             cand_idx = []
             for idx in range(netlist.init_size):
                 if netlist.mask[idx] == 1:
@@ -242,11 +258,10 @@ class Agent(object):
         self.replayMemory.append((self.currentState, action, reward, nextState, terminal))
         if len(self.replayMemory) > config.REPLAY_MEMORY:
             self.replayMemory.popleft()
-        if self.timeStep > config.OBSERVE:  # Train the network
+        if len(self.replayMemory) > config.OBSERVE:  # Train the network
             loss = self.train()
 
         self.currentState = nextState
-        self.timeStep += 1
         return loss
 
     def setInitState(self, initState):

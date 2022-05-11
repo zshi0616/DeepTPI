@@ -2,6 +2,7 @@ cd ./src
 
 python3 rl_train.py \
  --exp_id atpg_pc_new_no \
+ --RL_mode train \
  --RL_model non_level \
  --ftpt no \
  --target ATPG_PC \
@@ -10,5 +11,8 @@ python3 rl_train.py \
  --no_labels \
  --gate_types INPUT,AND,NOT,BUFF --dim_node_feature 4 --no_node_cop \
  --aggr_function aggnconv --wx_update \
- --reward cont --lr 0.0001 --op --aig \
+ --reward cont --op --aig \
+ --RL_max_times 400 \
+ --lr 1e-3 \
+ --resume
 

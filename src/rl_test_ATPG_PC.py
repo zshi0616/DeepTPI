@@ -69,15 +69,11 @@ def train_RL(args):
     tot_begin_time = time.time()
 
     for circuit_idx, g in enumerate(dataset):
-        print(g.name)
-        # if 'b15' not in g.name and 'b14' not in g.name: 
+        # if 'b15' not in g.name and 'b12' not in g.name and 'i2c' not in g.name: 
         #     continue
 
         # if g.name not in selected_name_list:
         #     continue
-
-        if circuit_idx >= 50:
-            break
 
         baseline_env = Env(g, config, args)
         dg_env = copy.deepcopy(baseline_env)
@@ -103,9 +99,9 @@ def train_RL(args):
             for idx in range(len(cp_pos_list)):
                 cp_pos = cp_pos_list[idx]
                 cp_type = cp_type_list[idx]
-                if not args.ignore_action:
-                    print('[Action] Insert {:} CP on Pos {:}, Time: {:}s'.format(cp_type, cp_pos, end_time-begin_time))
                 nextState, reward = dg_env.step_frame(cp_pos, cp_type, cp_idx, insert_cp_cnt)
+                if not args.ignore_action:
+                    print('[Action] Insert {:} CP on Pos {:}, Time: {:}s, Reward: {:}'.format(cp_type, cp_pos, end_time-begin_time, reward))
                 cp_idx += 1
 
         # Print
@@ -117,7 +113,6 @@ def train_RL(args):
         baseline_pc_list.append(int(baseline_pc))
         dg_pc_list.append(int(dg_pc))
         name_list.append(g.name)
-        print()
 
         # Save
         if args.save_bench:
@@ -130,6 +125,8 @@ def train_RL(args):
             baseline_env.netlist.save_verilog(args)
             dg_env.netlist.save_verilog(args)
             print('[INFO] Save {}'.format(args.bench_dir + '/' + g.name + '.bench'))
+        print()
+
 
     tot_end_time = time.time()
 
@@ -140,7 +137,7 @@ def train_RL(args):
 
     print('Baseline, DGRL')
     for idx in range(len(baseline_pc_list)):
-        print('{}: {:}, {:}'.format(name_list[idx], baseline_pc_list[idx], dg_pc_list[idx]/100))
+        print('{}: {:}, {:}'.format(name_list[idx], baseline_pc_list[idx], dg_pc_list[idx]))
 
     print('*** DGRL Reduction ***')
     print(np.average(np.array(baseline_pc_list) - np.array(dg_pc_list)))

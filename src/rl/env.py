@@ -154,6 +154,7 @@ class Env(object):
                 reward = -1 * self.pc_baseline
             else:
                 reward = self.pc_baseline - pattern_count 
+            self.pc_baseline = pattern_count
             return reward
         elif self.args.target == 'ATPG_TC':
             baseline = self.tc_baseline
